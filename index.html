@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ========== CSS Variables & Reset ========== */
     :root {
@@ -24,7 +24,7 @@
       --radius-btn: 12px;
       --shadow: 0 4px 20px rgba(255, 182, 193, 0.15);
       --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Raleway', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
       --font-ui: 'Montserrat', sans-serif;
     }
 
@@ -67,6 +67,12 @@
       padding: 1rem 1.25rem;
       max-width: 1100px;
       margin: 0 auto;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-left: auto;
     }
     .logo {
       font-family: var(--font-heading);
@@ -113,21 +119,28 @@
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      width: 32px;
-      height: 32px;
-      padding: 4px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      margin: -4px -4px -4px 0;
       background: none;
       border: none;
+      border-radius: var(--radius-btn);
       cursor: pointer;
       z-index: 101;
+      transition: background 0.2s;
     }
+    .burger:hover { background: var(--accent-light); }
     .burger span {
       display: block;
       width: 100%;
       height: 2px;
       background: var(--text);
       border-radius: 1px;
-      transition: transform 0.3s, opacity 0.3s;
+      transition: transform 0.3s, opacity 0.3s, background 0.2s;
+    }
+    .burger.is-open span {
+      background: var(--text);
     }
     .burger.is-open span:nth-child(1) {
       transform: translateY(7px) rotate(45deg);
@@ -136,35 +149,101 @@
     .burger.is-open span:nth-child(3) {
       transform: translateY(-7px) rotate(-45deg);
     }
-    /* Mobile menu */
+    /* Mobile menu — вне шапки, поверх всей страницы */
     .nav-mobile {
       position: fixed;
+      inset: 0;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--bg);
+      background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 30%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 0;
+      padding: 4rem 1.5rem 2rem;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-      z-index: 99;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease, pointer-events 0s linear 0.25s;
+      z-index: 9999;
+      -webkit-overflow-scrolling: touch;
     }
     .nav-mobile.is-open {
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .nav-mobile-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
     }
     .nav-mobile a {
-      font-family: var(--font-ui);
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      padding: 1rem 1.25rem;
+      font-family: var(--font-heading);
       font-weight: 600;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
+      color: var(--text);
+      text-align: center;
+      border-radius: var(--radius-btn);
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .nav-mobile a:hover,
+    .nav-mobile a:focus {
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--accent-strong);
+    }
+    .nav-mobile a:active { transform: scale(0.98); }
+    .nav-mobile-footer {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .nav-mobile-footer a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      max-width: none;
+      font-size: 0;
+      background: var(--accent-mid);
+      border-radius: 50%;
       color: var(--text);
     }
-    .nav-mobile a:hover { color: var(--accent-strong); }
+    .nav-mobile-footer a:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .nav-mobile-footer .icon { width: 24px; height: 24px; }
+    .nav-mobile-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-mid);
+      border: none;
+      border-radius: 50%;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-mobile-close:hover { background: var(--accent); color: var(--bg); }
     @media (min-width: 768px) {
       .burger { display: none; }
       .nav { display: flex; }
@@ -173,6 +252,7 @@
 
     /* ========== Hero ========== */
     .hero {
+      position: relative;
       min-height: 70vh;
       display: flex;
       flex-direction: column;
@@ -181,6 +261,36 @@
       text-align: center;
       padding: 3rem 1.25rem 4rem;
       background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg) 60%);
+      overflow: hidden;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    /* Изображение сбоку на всю высоту блока (в картинке уже прозрачность/градиент) */
+    .hero-bg-image {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: min(50%, 480px);
+      z-index: 0;
+      pointer-events: none;
+      display: none;
+    }
+    .hero-bg-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: right center;
+      mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+      mask-size: 100% 100%;
+      -webkit-mask-size: 100% 100%;
+    }
+    @media (min-width: 768px) {
+      .hero-bg-image { display: block; }
     }
     .hero h1 {
       font-family: var(--font-heading);
@@ -195,7 +305,7 @@
       font-size: 1rem;
       color: var(--text-muted);
       max-width: 520px;
-      margin: 0 0 2rem;
+      margin: 0 auto 2rem;
     }
     .btn {
       display: inline-flex;
@@ -249,6 +359,7 @@
       padding: 1.75rem;
       box-shadow: var(--shadow);
       transition: box-shadow 0.2s, border-color 0.2s;
+      text-align: center;
     }
     .card:hover {
       box-shadow: 0 8px 28px rgba(255, 182, 193, 0.2);
@@ -341,6 +452,7 @@
     .prices p {
       margin: 0.5rem 0;
       font-family: var(--font-ui);
+      font-size: 15px;
       font-weight: 500;
       color: var(--text);
     }
@@ -373,6 +485,19 @@
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 1rem;
+    }
+    .catalog-card .section-icon {
+      margin-bottom: 1rem;
+      width: auto;
+      height: auto;
+      min-width: 0;
+      background: none;
+      border-radius: 0;
+    }
+    .catalog-card .section-icon img {
+      height: 72px;
+      max-width: 96px;
+      filter: brightness(1.05) saturate(1.2);
     }
     .catalog-card.order-card {
       background: linear-gradient(135deg, var(--accent-light), var(--accent-mid));
@@ -407,32 +532,109 @@
     }
 
     /* ========== Block 6: Reviews ========== */
-    .reviews-grid {
-      display: grid;
-      gap: 1.5rem;
+    .reviews-slider-wrap {
       margin-top: 1.5rem;
+      overflow: hidden;
     }
-    @media (min-width: 640px) {
-      .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+    .reviews-slider {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 0.5rem;
+      -webkit-overflow-scrolling: touch;
     }
-    .review-placeholder {
-      aspect-ratio: 3/4;
-      background: #e8e8e8;
-      border-radius: var(--radius);
+    .reviews-slider::-webkit-scrollbar { height: 8px; }
+    .reviews-slider::-webkit-scrollbar-track { background: var(--accent-light); border-radius: 4px; }
+    .reviews-slider::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    .review-figure {
+      flex: 0 0 calc((100% - 2 * 1.5rem) / 3);
+      min-width: 260px;
+      max-width: 320px;
+      scroll-snap-align: start;
+    }
+    @media (max-width: 900px) {
+      .review-figure { flex: 0 0 calc((100% - 1.5rem) / 2); min-width: 220px; }
+    }
+    @media (max-width: 560px) {
+      .review-figure { flex: 0 0 85%; min-width: 0; }
+    }
+    .review-img-wrap:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+    /* Подпись под отзывом — цитата */
+    .review-cite {
+      margin: 1rem 0 0;
+      padding: 1rem 1rem 1rem 1.25rem;
+      background: linear-gradient(135deg, var(--accent-light) 0%, rgba(255, 228, 225, 0.6) 100%);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+    .review-cite .review-author {
+      display: block;
+      margin-top: 0.5rem;
+      font-family: var(--font-ui);
+      font-style: normal;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .review-cite .review-author::before { content: "— "; }
+    /* Модальное окно для просмотра изображения */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(45, 45, 45, 0.92);
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-overlay img {
+      max-width: 100%;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255, 255, 255, 0.35); }
+    .reviews-hint {
+      margin-top: 1rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      font-size: 0.85rem;
       text-align: center;
-      padding: 1rem;
     }
-    .review-placeholder figcaption {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
     /* ========== Block 7: Footer ========== */
     footer {
       background: linear-gradient(180deg, var(--accent-light) 0%, var(--accent-mid) 100%);
@@ -485,41 +687,208 @@
       transform: scale(1.05);
     }
     .footer-cta { text-align: center; }
+
+    /* Форма обратной связи */
+    .feedback-form {
+      max-width: 420px;
+      margin: 0 auto 2rem;
+      padding: 1.75rem;
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--accent-mid);
+      box-shadow: var(--shadow);
+    }
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+    .form-label {
+      display: block;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+    .form-label .optional { font-weight: 400; color: var(--text-muted); }
+    .feedback-form input,
+    .feedback-form textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--accent-mid);
+      border-radius: var(--radius-btn);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .feedback-form input:focus,
+    .feedback-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.25);
+    }
+    .feedback-form input::placeholder,
+    .feedback-form textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+    .feedback-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .feedback-form .btn { width: 100%; margin-top: 0.25rem; }
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .form-message {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-btn);
+      font-size: 0.95rem;
+      text-align: center;
+      display: none;
+    }
+    .form-message.show { display: block; }
+    .form-message.success {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2e7d32;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+    .form-message.error {
+      background: rgba(244, 67, 54, 0.1);
+      color: #c62828;
+      border: 1px solid rgba(244, 67, 54, 0.25);
+    }
+    .feedback-form.loading .btn-primary { pointer-events: none; opacity: 0.8; }
+
+    /* Icons */
+    .icon { display: inline-block; vertical-align: middle; fill: currentColor; }
+    .icon-sm { width: 20px; height: 20px; }
+    .icon-md { width: 28px; height: 28px; }
+    .icon-lg { width: 40px; height: 40px; }
+    .header-socials .icon { width: 18px; height: 18px; }
+    .footer-socials .icon { width: 24px; height: 24px; }
+    .section-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1rem;
+      background: var(--accent-light);
+      border-radius: 50%;
+      color: var(--accent-strong);
+    }
+    .section-icon .icon { width: 28px; height: 28px; }
+    .section-icon img {
+      width: auto;
+      height: 36px;
+      max-width: 44px;
+      object-fit: contain;
+    }
+    .advantage-item .section-icon { width: 44px; height: 44px; margin: 0 0 0.75rem; }
+    .advantage-item .section-icon .icon { width: 22px; height: 22px; }
+    .hero-icon { margin-bottom: 0.75rem; color: var(--accent-strong); }
+    .hero-icon .icon { width: 48px; height: 48px; }
+
+    /* Review images: show img or fallback, клик открывает модалку */
+    .review-img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #e8e8e8;
+      cursor: pointer;
+    }
+    .review-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .review-img-wrap .review-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .review-img-wrap .review-fallback.show { display: flex; }
+    .review-img-wrap img[src=""] + .review-fallback,
+    .review-img-wrap img:not([src]) + .review-fallback { display: flex; }
   </style>
 </head>
 <body>
+  <!-- SVG sprite: иконки соцсетей и тематические -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
+    <defs>
+      <symbol id="icon-telegram" viewBox="0 0 24 24"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+      <symbol id="icon-vk" viewBox="0 0 24 24"><path fill="currentColor" d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.5 14.27h-1.75c-.55 0-.72-.44-1.72-1.45-.87-.84-1.24-.95-1.46-.95-.3 0-.38.09-.38.5v1.32c0 .35-.11.57-1.05.57-1.54 0-3.26-1.02-4.47-2.94C6.02 11.69 5.5 9.7 5.5 9.28c0-.21.09-.41.5-.41h1.46c.37 0 .51.17.65.57.72 2.09 1.93 3.91 2.43 3.91.18 0 .27-.09.27-.55v-2.55c-.06-1-.58-1.08-.58-1.43 0-.17.14-.34.37-.34h2.3c.31 0 .42.17.42.54v3.39c0 .31.14.42.23.42.18 0 .34-.11.68-.45 1.05-1.18 1.8-2.99 1.8-2.99.1-.21.27-.41.64-.41h1.46c.44 0 .54.23.44.54-.18.85-1.97 3.38-1.97 3.38-.15.26-.21.37 0 .65.15.21.67.65 1.01 1.01.71.71 1.11 1.17 1.23 1.54.14.41-.07.62-.48.62z"/></symbol>
+      <symbol id="icon-sparkle" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></symbol>
+      <symbol id="icon-hair" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C10 2 8 4 6 8c-1 2-2 4-2 6 0 2 1 3 2 3 1 0 2-1 2-2 0 0 0-1 1-2 1 0 2-1 2-2 0-1-1-2-1-3 0-2 2-4 4-5 2-1 4-1 6 0 2 1 4 3 4 5 0 1-1 2-1 3 0 1 1 2 2 2 1 1 1 2 2 2 1 0 2-1 2-3 0-2-1-4-2-6-2-4-4-6-6-8l-2 2z"/></symbol>
+      <symbol id="icon-gem" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5L2 9l10 12L22 9l-3-6zM9.62 8l1.5-3h1.76l1.5 3H9.62zM11 10v8.18L5.38 10H11zm2 0h5.62L13 18.18V10zm6-2h-2.26l-1.5-3h2.26l1.5 3zM7.24 5h2.26l-1.5 3H4.24l1.5-3z"/></symbol>
+      <symbol id="icon-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22c-4.97 0-9-2.58-9-6V6l9-4 9 4v10c0 3.42-4.03 6-9 6zm0-2c3.87 0 7-1.94 7-4V7.06l-7-3.11L5 7.06V16c0 2.06 3.13 4 7 4z"/></symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
+      <symbol id="icon-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></symbol>
+    </defs>
+  </svg>
+
   <!-- ========== Block 1: Header + Hero ========== -->
   <header class="header">
     <div class="header-inner">
       <a href="#" class="logo">Appolonskaya_Hair</a>
-      <nav class="nav" aria-label="Основное меню">
-        <a href="#extension">Наращивание</a>
-        <a href="#catalog">Продажа волос</a>
-        <a href="#contacts">Контакты</a>
-      </nav>
-      <div class="header-socials">
-        <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
-        <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener" aria-label="ВКонтакте">VK</a>
+      <div class="header-right">
+        <nav class="nav" aria-label="Основное меню">
+          <a href="#extension">Наращивание</a>
+          <a href="#catalog">Продажа волос</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+        <div class="header-socials">
+          <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener" aria-label="Telegram"><svg class="icon" aria-hidden="true"><use href="#icon-telegram"></use></svg></a>
+          <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener" aria-label="ВКонтакте"><svg class="icon" aria-hidden="true"><use href="#icon-vk"></use></svg></a>
+        </div>
       </div>
       <button type="button" class="burger" aria-label="Открыть меню" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <nav class="nav-mobile" aria-label="Мобильное меню">
+  </header>
+
+  <!-- Мобильное меню вне шапки, чтобы перекрывать всю страницу -->
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Мобильное меню">
+    <button type="button" class="nav-mobile-close" aria-label="Закрыть меню">&times;</button>
+    <div class="nav-mobile-links">
       <a href="#extension">Наращивание</a>
       <a href="#catalog">Продажа волос</a>
       <a href="#contacts">Контакты</a>
-    </nav>
-  </header>
+    </div>
+    <div class="nav-mobile-footer">
+      <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener" aria-label="Telegram"><svg class="icon" aria-hidden="true"><use href="#icon-telegram"></use></svg></a>
+      <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener" aria-label="ВКонтакте"><svg class="icon" aria-hidden="true"><use href="#icon-vk"></use></svg></a>
+    </div>
+  </nav>
 
   <section class="hero">
-    <h1>Капсульное наращивание волос в Воронеже</h1>
-    <p class="subtitle">Работаем только с люкс- и премиум-материалами. Индивидуальный подбор волос под заказ.</p>
-    <a href="#contacts" class="btn btn-primary">Записаться на консультацию</a>
-    <div class="hero-contacts">
-      ТГ <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener">@appolonskaya_hair</a>
-      ВК <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener">vk.com/appolonskaya_hair</a>
-      · Адрес: Центр Воронежа, ул. Ленина
+    <div class="hero-bg-image" aria-hidden="true">
+      <img src="img/strictly.png" alt="">
+    </div>
+    <div class="hero-content">
+      <h1>Капсульное наращивание волос в Воронеже</h1>
+      <p class="subtitle">Работаем только с люкс- и премиум-материалами. Индивидуальный подбор волос под заказ.</p>
+      <a href="#contacts" class="btn btn-primary">Записаться на консультацию</a>
+      <div class="hero-contacts">
+        <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-telegram"></use></svg> @appolonskaya_hair</a>
+        <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-vk"></use></svg> vk.com/appolonskaya_hair</a>
+      </div>
     </div>
   </section>
 
@@ -528,11 +897,13 @@
     <h2 class="visually-hidden">Наши услуги</h2>
     <div class="services-grid">
       <article class="card">
+        <div class="section-icon"><img src="icons/2.png" alt="" aria-hidden="true"></div>
         <h3>Капсульное наращивание</h3>
         <p>Итальянская технология. Максимальная натуральность. Только премиум-сырье.</p>
         <a href="#extension" class="btn btn-secondary">Подробнее о наращивании</a>
       </article>
       <article class="card">
+        <div class="section-icon"><img src="icons/1.png" alt="" aria-hidden="true"></div>
         <h3>Продажа натуральных волос</h3>
         <p>Люкс и Премиум качество (славянские, европейские). Любая длина и структура. Возможен заказ.</p>
         <a href="#catalog" class="btn btn-secondary">Каталог волос</a>
@@ -564,16 +935,19 @@
     <p class="section-subtitle">Только люкс и премиум качество. В наличии и под заказ.</p>
     <div class="catalog-grid">
       <article class="catalog-card">
+        <div class="section-icon"><img src="icons/3.png" alt="" aria-hidden="true"></div>
         <h3>Славянские волосы «Премиум»</h3>
         <p class="price">15 000 руб.</p>
         <p class="specs">Длина: 50 см. Тонкие, шелковистые, 100% натуральные.</p>
       </article>
       <article class="catalog-card">
+        <div class="section-icon"><img src="icons/4.png" alt="" aria-hidden="true"></div>
         <h3>Европейские волосы «Lux»</h3>
         <p class="price">18 000 руб.</p>
         <p class="specs">Длина: 60 см. Более плотные, густые.</p>
       </article>
       <article class="catalog-card order-card">
+        <div class="section-icon"><img src="icons/5.png" alt="" aria-hidden="true"></div>
         <h3>Индивидуальный заказ</h3>
         <p class="specs">Не нашли нужный цвет или длину? Привезем под заказ из Европы.</p>
         <a href="#contacts" class="btn btn-primary">Заказать подбор</a>
@@ -586,18 +960,22 @@
     <h2 class="section-title">Почему выбирают нас</h2>
     <div class="advantages-grid">
       <div class="advantage-item">
+        <div class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></div>
         <h3>Только Премиум</h3>
         <p>Работаем с элитными материалами, которые не путаются и служат годами.</p>
       </div>
       <div class="advantage-item">
+        <div class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg></div>
         <h3>Индивидуальный подход</h3>
         <p>Привезем волосы под заказ специально для вас. Вы не ограничены остатками в салоне.</p>
       </div>
       <div class="advantage-item">
+        <div class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-shield"></use></svg></div>
         <h3>Капсульная технология</h3>
         <p>Безопасное наращивание, не повреждающее ваши волосы.</p>
       </div>
       <div class="advantage-item">
+        <div class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-gem"></use></svg></div>
         <h3>Прозрачность</h3>
         <p>Честные цены на материалы и работу. Никакой переплаты за «бренд».</p>
       </div>
@@ -607,30 +985,97 @@
   <!-- ========== Block 6: Отзывы ========== -->
   <section class="section" id="reviews">
     <h2 class="section-title">Нам доверяют</h2>
-    <div class="reviews-grid">
-      <figure>
-        <div class="review-placeholder">Скриншот отзыва из папки reviews/1.png</div>
-        <figcaption>Скриншот отзыва из папки reviews/1.png</figcaption>
-      </figure>
-      <figure>
-        <div class="review-placeholder">Скриншот отзыва из папки reviews/2.png</div>
-        <figcaption>Скриншот отзыва из папки reviews/2.png</figcaption>
-      </figure>
-      <figure>
-        <div class="review-placeholder">Скриншот отзыва из папки reviews/3.png</div>
-        <figcaption>Скриншот отзыва из папки reviews/3.png</figcaption>
-      </figure>
+    <p class="section-subtitle">Отзывы клиентов о наращивании и качестве волос</p>
+    <div class="reviews-slider-wrap">
+      <div class="reviews-slider" role="list">
+        <figure class="review-figure" role="listitem">
+          <div class="review-img-wrap" role="button" tabindex="0" data-review-src="reviews/1.png" aria-label="Открыть отзыв в полном размере">
+            <img src="reviews/1.png" alt="Отзыв Анны" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show')">
+            <div class="review-fallback">Скриншот отзыва (reviews/1.png)</div>
+          </div>
+          <blockquote class="review-cite">
+            Очень довольна результатом! Волосы выглядят как свои, никто не верит, что наращивание. Носить удобно, не путаются.
+            <span class="review-author">Анна</span>
+          </blockquote>
+        </figure>
+        <figure class="review-figure" role="listitem">
+          <div class="review-img-wrap" role="button" tabindex="0" data-review-src="reviews/2.png" aria-label="Открыть отзыв в полном размере">
+            <img src="reviews/2.png" alt="Отзыв Марины" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show')">
+            <div class="review-fallback">Скриншот отзыва (reviews/2.png)</div>
+          </div>
+          <blockquote class="review-cite">
+            Делала капсульное наращивание впервые. Консультация помогла определиться с цветом и длиной. Спасибо за терпение и профессионализм!
+            <span class="review-author">Марина</span>
+          </blockquote>
+        </figure>
+        <figure class="review-figure" role="listitem">
+          <div class="review-img-wrap" role="button" tabindex="0" data-review-src="reviews/3.png" aria-label="Открыть отзыв в полном размере">
+            <img src="reviews/3.png" alt="Отзыв Елены" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show')">
+            <div class="review-fallback">Скриншот отзыва (reviews/3.png)</div>
+          </div>
+          <blockquote class="review-cite">
+            Заказывала волосы под себя — привезли именно то, что нужно. Качество на высоте, буду обращаться ещё.
+            <span class="review-author">Елена</span>
+          </blockquote>
+        </figure>
+        <figure class="review-figure" role="listitem">
+          <div class="review-img-wrap" role="button" tabindex="0" data-review-src="reviews/4.png" aria-label="Открыть отзыв в полном размере">
+            <img src="reviews/4.png" alt="Отзыв Ольги" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show')">
+            <div class="review-fallback">Скриншот отзыва (reviews/4.png)</div>
+          </div>
+          <blockquote class="review-cite">
+            Долго искала студию с премиум-материалами. Здесь всё честно: и волосы, и цены. Рекомендую.
+            <span class="review-author">Ольга</span>
+          </blockquote>
+        </figure>
+        <figure class="review-figure" role="listitem">
+          <div class="review-img-wrap" role="button" tabindex="0" data-review-src="reviews/5.png" aria-label="Открыть отзыв в полном размере">
+            <img src="reviews/5.png" alt="Отзыв Ирины" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show')">
+            <div class="review-fallback">Скриншот отзыва (reviews/5.png)</div>
+          </div>
+          <blockquote class="review-cite">
+            Делала и наращивание, и покупала волосы отдельно. В обоих случаях осталась в восторге. Атмосфера в салоне очень приятная.
+            <span class="review-author">Ирина</span>
+          </blockquote>
+        </figure>
+      </div>
     </div>
+    <p class="reviews-hint">Прокрутите в сторону, чтобы посмотреть все отзывы · Нажмите на фото, чтобы открыть</p>
   </section>
+
+  <!-- Модальное окно: просмотр изображения отзыва -->
+  <div id="review-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Просмотр отзыва">
+    <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
+    <img src="" alt="Отзыв в полном размере" id="review-modal-img">
+  </div>
 
   <!-- ========== Block 7: Контакты (Footer) ========== -->
   <footer id="contacts">
     <div class="section">
       <h2 class="section-title">Начните с бесплатной консультации</h2>
       <div class="footer-how">
-        <p>Напишите нам в Telegram или ВКонтакте.</p>
-        <p>Или приходите в салон по адресу: ул. Ленина (центр Воронежа).</p>
+        <p>Оставьте заявку — мы перезвоним или напишем в Telegram.</p>
+        <p>Или приходите в салон: ул. Ленина (центр Воронежа).</p>
       </div>
+      <!-- Форма: замените YOUR_FORMSPREE_ID на ID с formspree.io -->
+      <form id="feedback-form" class="feedback-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="post">
+        <input type="hidden" name="_subject" value="Заявка с лендинга Appolonskaya_Hair">
+        <div class="form-group">
+          <label class="form-label" for="form-name">Имя</label>
+          <input type="text" id="form-name" name="name" required placeholder="Как к вам обращаться" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="form-contact">Телефон или Telegram</label>
+          <input type="text" id="form-contact" name="contact" required placeholder="+7 (999) 123-45-67 или @username" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="form-message">Сообщение <span class="optional">(необязательно)</span></label>
+          <textarea id="form-message" name="message" placeholder="Например: интересно наращивание, хочу записаться на консультацию"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить заявку</button>
+        <p class="form-message" id="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку данных для связи.</p>
+      </form>
       <div class="map-wrap">
         <iframe
           src="https://yandex.ru/map-widget/v1/?ll=39.200296%2C51.660781&z=16&l=map"
@@ -641,8 +1086,8 @@
         </iframe>
       </div>
       <div class="footer-socials">
-        <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
-        <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener" aria-label="ВКонтакте">VK</a>
+        <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener" aria-label="Telegram"><svg class="icon" aria-hidden="true"><use href="#icon-telegram"></use></svg></a>
+        <a href="https://vk.com/appolonskaya_hair" target="_blank" rel="noopener" aria-label="ВКонтакте"><svg class="icon" aria-hidden="true"><use href="#icon-vk"></use></svg></a>
       </div>
       <div class="footer-cta">
         <a href="#contacts" class="btn btn-primary">Записаться на консультацию</a>
@@ -664,14 +1109,100 @@
         burger.setAttribute('aria-expanded', burger.classList.contains('is-open'));
       }
 
+      var closeBtn = navMobile ? navMobile.querySelector('.nav-mobile-close') : null;
       if (burger && navMobile) {
         burger.addEventListener('click', toggleMenu);
+        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
         navLinks.forEach(function (link) {
           link.addEventListener('click', function () {
             if (navMobile.classList.contains('is-open')) toggleMenu();
           });
         });
       }
+    })();
+
+    // Форма обратной связи (Formspree): замените YOUR_FORMSPREE_ID в action формы на свой ID с formspree.io
+    (function () {
+      var form = document.getElementById('feedback-form');
+      var statusEl = document.getElementById('form-status');
+      if (!form || !statusEl) return;
+
+      function showMessage(text, type) {
+        statusEl.textContent = text;
+        statusEl.className = 'form-message show ' + (type || '');
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var formData = new FormData(form);
+        form.classList.add('loading');
+        statusEl.className = 'form-message';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            form.classList.remove('loading');
+            if (data.ok) {
+              showMessage('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
+              form.reset();
+            } else {
+              showMessage('Не удалось отправить. Напишите нам в Telegram или ВК.', 'error');
+            }
+          })
+          .catch(function () {
+            form.classList.remove('loading');
+            showMessage('Ошибка отправки. Напишите нам в Telegram или ВК.', 'error');
+          });
+      });
+    })();
+
+    // Модальное окно отзывов: открытие по клику на изображение, закрытие по overlay/кнопке/Escape
+    (function () {
+      var modal = document.getElementById('review-modal');
+      var modalImg = document.getElementById('review-modal-img');
+      var closeBtn = modal && modal.querySelector('.modal-close');
+      var wraps = document.querySelectorAll('.review-img-wrap[data-review-src]');
+
+      function openModal(src) {
+        if (!modal || !modalImg) return;
+        modalImg.src = src;
+        modal.classList.add('show');
+        modal.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('show');
+        modal.setAttribute('hidden', '');
+        document.body.style.overflow = '';
+      }
+
+      wraps.forEach(function (wrap) {
+        wrap.addEventListener('click', function () {
+          var img = wrap.querySelector('img');
+          var src = wrap.getAttribute('data-review-src') || (img && img.src);
+          if (src) openModal(src);
+        });
+        wrap.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            wrap.click();
+          }
+        });
+      });
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) closeModal();
+        });
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
+      });
     })();
   </script>
 </body>
