@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Капсульное наращивание волос в Воронеже. Appolonskaya_Hair — только люкс и премиум материалы. Натуральные волосы, бесплатная консультация. Центр Воронежа.">
-  <meta name="keywords" content="наращивание волос Воронеж, капсульное наращивание, натуральные волосы Воронеж, купить волосы, премиум волосы, люкс наращивание, студия волос">
+  <meta name="description" content="Капсульное наращивание и продажа волос в Воронеже. Апполонская_Хэир — линейки «Славянка . Подростковые волосы. Люкс» и «Славянский тип. Премиум» (Double Drawn). Консультация, центр Воронежа.">
+  <meta name="keywords" content="наращивание волос Воронеж, капсульное наращивание, натуральные волосы Воронеж, купить волосы, славянские волосы, double drawn, люкс волосы, премиум волосы, студия волос">
   <title>Апполонская_Хэир — Капсульное наращивание волос в Воронеже</title>
   <link rel="icon" href="icons/logo.png" type="image/png">
   <link rel="apple-touch-icon" href="icons/logo.png">
@@ -416,10 +416,17 @@
       box-shadow: var(--shadow);
       transition: box-shadow 0.2s, border-color 0.2s;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
     }
     .card:hover {
       box-shadow: 0 8px 28px rgba(255, 182, 193, 0.2);
       border-color: var(--accent);
+    }
+    .card .section-services-icon {
+      flex-shrink: 0;
     }
     .card h3 {
       font-family: var(--font-heading);
@@ -427,11 +434,22 @@
       font-size: 1.5rem;
       margin: 0 0 0.75rem;
       color: var(--text);
+      min-height: 2.85em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
     }
     .card p {
-      margin: 0 0 1.25rem;
+      margin: 0 0 1rem;
       color: var(--text-muted);
       font-size: 0.95rem;
+      flex: 1 1 auto;
+      width: 100%;
+    }
+    .card .btn {
+      margin-top: auto;
+      flex-shrink: 0;
     }
     .btn-secondary {
       background: var(--accent-light);
@@ -1145,7 +1163,7 @@
       <img src="img/strictly.png" alt="">
     </div>
     <div class="hero-content">
-      <h1>Капсульное наращивание волос в Воронеже</h1>
+      <h1>Капсульное наращивание и продажа волос в Воронеже</h1>
       <p class="subtitle">Работаем только с люкс- и премиум-материалами. Индивидуальный подбор волос под заказ.</p>
       <a href="#contacts" class="btn btn-primary">Записаться на консультацию</a>
       <div class="hero-contacts">
@@ -1168,7 +1186,7 @@
       <article class="card">
         <div class="section-services-icon"><img src="icons/hair_sale.png" alt="" aria-hidden="true"></div>
         <h3>Продажа натуральных волос</h3>
-        <p>Люкс и Премиум качество (славянские, европейские). Любая длина и структура. Возможен заказ.</p>
+        <p>Две линейки славянских волос: «Славянка . Подростковые волосы. Люкс» и «Славянский тип. Премиум» (Double Drawn). Любая длина и структура. Возможен заказ.</p>
         <a href="#catalog" class="btn btn-secondary">Каталог волос</a>
       </article>
     </div>
@@ -1208,19 +1226,19 @@
   <!-- ========== Block 4: Каталог волос ========== -->
   <section class="section" id="catalog">
     <h2 class="section-title">Купить натуральные волосы в Воронеже</h2>
-    <p class="section-subtitle">Только люкс и премиум качество. В наличии и под заказ.</p>
+    <p class="section-subtitle">Линейки «Славянка . Подростковые волосы. Люкс» и «Славянский тип. Премиум». В наличии и под заказ.</p>
     <div class="catalog-grid">
       <article class="catalog-card">
         <div class="section-icon"><img src="icons/russian_hair.png" alt="" aria-hidden="true"></div>
-        <h3>Славянские волосы «Премиум»</h3>
-        <p class="specs">Тонкие, шелковистые, 100% натуральные.</p>
-        <button type="button" class="btn btn-secondary js-price-link" data-price-tab="price-tab-slavic">Посмотреть прайс</button>
+        <h3>Славянка . Подростковые волосы. Люкс</h3>
+        <p class="specs">С одного донора. Собственное производство</p>
+        <button type="button" class="btn btn-secondary js-price-link" data-price-tab="price-tab-euro">Посмотреть прайс</button>
       </article>
       <article class="catalog-card">
         <div class="section-icon"><img src="icons/russian_hair_type.png" alt="" aria-hidden="true"></div>
-        <h3>Европейские волосы «Lux»</h3>
-        <p class="specs">Более плотные, густые.</p>
-        <button type="button" class="btn btn-secondary js-price-link" data-price-tab="price-tab-euro">Посмотреть прайс</button>
+        <h3>Славянский тип. Премиум</h3>
+        <p class="specs">Double Drawn</p>
+        <button type="button" class="btn btn-secondary js-price-link" data-price-tab="price-tab-slavic">Посмотреть прайс</button>
       </article>
       <article class="catalog-card order-card">
         <div class="section-icon"><img src="icons/individual_order.png" alt="" aria-hidden="true"></div>
@@ -1235,11 +1253,11 @@
       <p class="priceboard-subtitle">Выберите тип и сравните стоимость по длине и тону</p>
 
       <div class="hair-type-tabs" role="tablist" aria-label="Тип волос">
-        <button type="button" class="hair-type-tab is-active" role="tab" aria-selected="true" aria-controls="price-panel-slavic" id="price-tab-slavic" data-target="price-panel-slavic">Славянские «Премиум»</button>
-        <button type="button" class="hair-type-tab" role="tab" aria-selected="false" aria-controls="price-panel-euro" id="price-tab-euro" data-target="price-panel-euro">Европейские «Lux»</button>
+        <button type="button" class="hair-type-tab is-active" role="tab" aria-selected="true" aria-controls="price-panel-euro" id="price-tab-euro" data-target="price-panel-euro" tabindex="0">Славянка . Подростковые волосы. Люкс</button>
+        <button type="button" class="hair-type-tab" role="tab" aria-selected="false" aria-controls="price-panel-slavic" id="price-tab-slavic" data-target="price-panel-slavic" tabindex="-1">Славянский тип. Премиум</button>
       </div>
 
-      <div class="price-panel" id="price-panel-slavic" role="tabpanel" aria-labelledby="price-tab-slavic">
+      <div class="price-panel" id="price-panel-euro" role="tabpanel" aria-labelledby="price-tab-euro">
         <div class="price-table-wrap">
           <table class="price-table">
             <thead>
@@ -1263,11 +1281,11 @@
             </tbody>
           </table>
         </div>
-        <p class="price-note">Цены указаны в рублях за 100 грамм. Точный расчёт после консультации и подбора.</p>
+        <p class="price-note">Таблица — для линейки «Славянка . Подростковые волосы. Люкс». Цены в рублях за 100 грамм. Точный расчёт после консультации и подбора.</p>
       </div>
 
-      <div class="price-panel" id="price-panel-euro" role="tabpanel" aria-labelledby="price-tab-euro" hidden>
-        <p class="price-placeholder">Прайс для европейских волос «Lux» будет добавлен немного позже.</p>
+      <div class="price-panel" id="price-panel-slavic" role="tabpanel" aria-labelledby="price-tab-slavic" hidden>
+        <p class="price-placeholder">Прайс для линейки «Славянский тип. Премиум» (Double Drawn) уточняйте при консультации — подберём объём и длину под ваш запрос.</p>
       </div>
     </section>
   </section>
