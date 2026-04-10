@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Капсульное наращивание волос в Воронеже. Appolonskaya_Hair — только люкс и премиум материалы. Натуральные волосы, бесплатная консультация. Центр Воронежа.">
   <meta name="keywords" content="наращивание волос Воронеж, капсульное наращивание, натуральные волосы Воронеж, купить волосы, премиум волосы, люкс наращивание, студия волос">
-  <title>Appolonskaya_Hair — Капсульное наращивание волос в Воронеже</title>
+  <title>Апполонская_Хэир — Капсульное наращивание волос в Воронеже</title>
+  <link rel="icon" href="icons/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/logo.png">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant:ital,wght@0,500;0,600;0,700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ========== CSS Variables & Reset ========== */
     :root {
@@ -24,12 +26,19 @@
       --radius-btn: 12px;
       --shadow: 0 4px 20px rgba(255, 182, 193, 0.15);
       --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-brand: 'Great Vibes', 'Cormorant', 'Cormorant Garamond', cursive;
       --font-body: 'Montserrat', sans-serif;
       --font-ui: 'Montserrat', sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+    }
+    @media (min-width: 768px) {
+      html { scroll-padding-top: 7rem; }
+    }
     body {
       margin: 0;
       font-family: var(--font-body);
@@ -74,11 +83,58 @@
       gap: 1.25rem;
       margin-left: auto;
     }
-    .logo {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.35rem;
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      min-width: 0;
+      flex-shrink: 0;
+    }
+    @media (min-width: 768px) {
+      .logo-link { gap: 0.85rem; }
+    }
+    .logo-link:hover .logo-text { color: var(--accent-strong); }
+    .logo-img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: brightness(1.22) saturate(1.32) contrast(1.06);
+    }
+    @media (min-width: 768px) {
+      .logo-img {
+        width: 72px;
+        height: 72px;
+      }
+    }
+    .logo-text {
+      font-family: var(--font-brand);
+      font-weight: 400;
+      font-size: 1.75rem;
+      letter-spacing: 0.02em;
+      font-feature-settings: "kern" 1;
       color: var(--text);
+      line-height: 1.1;
+      transition: color 0.2s;
+    }
+    @media (min-width: 768px) {
+      .logo-text {
+        font-size: 2.15rem;
+        letter-spacing: 0.03em;
+      }
+    }
+    @media (max-width: 767px) {
+      .logo-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
     }
     .nav {
       display: none;
@@ -1049,7 +1105,10 @@
   <!-- ========== Block 1: Header + Hero ========== -->
   <header class="header">
     <div class="header-inner">
-      <a href="#" class="logo">Appolonskaya_Hair</a>
+      <a href="#" class="logo-link" aria-label="Апполонская_Хэир, на главную">
+        <img src="icons/logo.png" alt="" class="logo-img" width="72" height="72" decoding="async">
+        <span class="logo-text">Апполонская_Хэир</span>
+      </a>
       <div class="header-right">
         <nav class="nav" aria-label="Основное меню">
           <a href="#extension">Наращивание</a>
