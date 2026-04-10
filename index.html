@@ -442,19 +442,46 @@
       background: var(--accent);
       border-radius: 50%;
     }
-    .prices {
-      background: var(--accent-light);
+    .work-rates {
+      margin: 0 0 2rem;
+      padding: 1.1rem;
+      border: 1px solid var(--accent-mid);
       border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      background: #fff;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+    .work-rates h3 {
+      margin: 0 0 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: var(--text);
       text-align: center;
     }
-    .prices p {
-      margin: 0.5rem 0;
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 500;
+    .work-rates-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.55rem;
+    }
+    .work-rates-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: var(--radius-btn);
+      background: rgba(255, 240, 245, 0.55);
+      font-size: 0.95rem;
       color: var(--text);
+    }
+    .work-rates-list .rate-name {
+      color: var(--text-muted);
+    }
+    .work-rates-list .rate-value {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      white-space: nowrap;
     }
 
     /* ========== Block 4: Catalog ========== */
@@ -473,18 +500,26 @@
       padding: 1.5rem;
       text-align: center;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .catalog-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .catalog-card .price {
-      font-family: var(--font-ui);
-      font-weight: 700;
-      color: var(--accent-strong);
-      margin: 0.5rem 0;
+    .catalog-card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+      min-height: 2.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .catalog-card .specs {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 1rem;
+      min-height: 3.2em;
+    }
+    .catalog-card .btn {
+      margin-top: auto;
     }
     .catalog-card .section-icon {
       margin-bottom: 1rem;
@@ -502,6 +537,107 @@
     .catalog-card.order-card {
       background: linear-gradient(135deg, var(--accent-light), var(--accent-mid));
       border-color: var(--accent);
+    }
+    .catalog-priceboard {
+      margin-top: 2rem;
+      background: linear-gradient(180deg, rgba(255, 240, 245, 0.55) 0%, rgba(255, 255, 255, 0.95) 100%);
+      border: 1px solid var(--accent-mid);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+    }
+    .catalog-priceboard h3 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 1.55rem;
+      text-align: center;
+      color: var(--text);
+    }
+    .priceboard-subtitle {
+      margin: 0.35rem 0 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+    .hair-type-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .hair-type-tab {
+      border: 1px solid var(--accent-mid);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.48rem 0.95rem;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .hair-type-tab:hover { border-color: var(--accent); }
+    .hair-type-tab.is-active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .price-panel[hidden] { display: none; }
+    .price-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-btn);
+      border: 1px solid rgba(255, 182, 193, 0.5);
+      background: #fff;
+    }
+    .price-table {
+      width: 100%;
+      min-width: 780px;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+    .price-table th,
+    .price-table td {
+      padding: 0.68rem 0.6rem;
+      border-bottom: 1px solid rgba(255, 182, 193, 0.28);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .price-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--accent-light);
+      z-index: 1;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      color: var(--text);
+    }
+    .price-table tbody tr:nth-child(even) td {
+      background: rgba(255, 240, 245, 0.45);
+    }
+    .price-table tbody td:first-child,
+    .price-table thead th:first-child {
+      text-align: left;
+      padding-left: 0.9rem;
+      font-weight: 600;
+    }
+    .price-note {
+      margin: 0.9rem 0 0;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      text-align: center;
+    }
+    .price-placeholder {
+      margin: 0;
+      padding: 1rem;
+      border-radius: var(--radius-btn);
+      border: 1px dashed var(--accent);
+      background: rgba(255, 240, 245, 0.5);
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.92rem;
     }
 
     /* ========== Block 5: Advantages ========== */
@@ -602,6 +738,12 @@
       opacity: 1;
       visibility: visible;
     }
+    .modal-content {
+      position: relative;
+      width: min(980px, 100%);
+      display: grid;
+      place-items: center;
+    }
     .modal-overlay img {
       max-width: 100%;
       max-height: 90vh;
@@ -610,6 +752,9 @@
       object-fit: contain;
       border-radius: var(--radius);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
     }
     .modal-close {
       position: absolute;
@@ -627,8 +772,56 @@
       font-size: 1.5rem;
       cursor: pointer;
       transition: background 0.2s;
+      z-index: 3;
     }
     .modal-close:hover { background: rgba(255, 255, 255, 0.35); }
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.35rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      z-index: 3;
+    }
+    .modal-nav:hover { background: rgba(255, 255, 255, 0.3); }
+    .modal-nav:active { transform: translateY(-50%) scale(0.98); }
+    .modal-prev { left: 0.25rem; }
+    .modal-next { right: 0.25rem; }
+    .modal-nav[disabled] {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+    .modal-counter {
+      position: absolute;
+      left: 50%;
+      bottom: 0.75rem;
+      transform: translateX(-50%);
+      padding: 0.35rem 0.6rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.92);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      z-index: 2;
+      user-select: none;
+    }
+    @media (max-width: 560px) {
+      .modal-nav { width: 44px; height: 44px; }
+      .modal-prev { left: 0.1rem; }
+      .modal-next { right: 0.1rem; }
+    }
     .reviews-hint {
       margin-top: 1rem;
       font-size: 0.9rem;
@@ -932,9 +1125,22 @@
         <li><strong>Подбор материала:</strong> Помогаем выбрать идеальный цвет, структуру и длину из наличия или под заказ.</li>
         <li><strong>Процедура наращивания:</strong> Комфортное наращивание в удобное для вас время.</li>
       </ul>
-      <div class="prices">
-        <p>Капсульное наращивание «Премиум»: от 8 000 руб.</p>
-        <p>Капсульное наращивание «Lux» (элитные славянские волосы): от 12 000 руб.</p>
+      <div class="work-rates" aria-label="Стоимость работ по наращиванию">
+        <h3>Стоимость работ</h3>
+        <ul class="work-rates-list">
+          <li>
+            <span class="rate-name">Наращивание (1 прядь)</span>
+            <span class="rate-value">40 ₽</span>
+          </li>
+          <li>
+            <span class="rate-name">Капсуляция</span>
+            <span class="rate-value">10 ₽</span>
+          </li>
+          <li>
+            <span class="rate-name">Снятие</span>
+            <span class="rate-value">10 ₽</span>
+          </li>
+        </ul>
       </div>
       <a href="#contacts" class="btn btn-primary">Записаться на консультацию по наращиванию</a>
     </div>
@@ -948,14 +1154,14 @@
       <article class="catalog-card">
         <div class="section-icon"><img src="icons/russian_hair.png" alt="" aria-hidden="true"></div>
         <h3>Славянские волосы «Премиум»</h3>
-        <p class="price">15 000 руб.</p>
-        <p class="specs">Длина: 50 см. Тонкие, шелковистые, 100% натуральные.</p>
+        <p class="specs">Тонкие, шелковистые, 100% натуральные.</p>
+        <button type="button" class="btn btn-secondary js-price-link" data-price-tab="price-tab-slavic">Посмотреть прайс</button>
       </article>
       <article class="catalog-card">
         <div class="section-icon"><img src="icons/russian_hair_type.png" alt="" aria-hidden="true"></div>
         <h3>Европейские волосы «Lux»</h3>
-        <p class="price">18 000 руб.</p>
-        <p class="specs">Длина: 60 см. Более плотные, густые.</p>
+        <p class="specs">Более плотные, густые.</p>
+        <button type="button" class="btn btn-secondary js-price-link" data-price-tab="price-tab-euro">Посмотреть прайс</button>
       </article>
       <article class="catalog-card order-card">
         <div class="section-icon"><img src="icons/individual_order.png" alt="" aria-hidden="true"></div>
@@ -964,6 +1170,47 @@
         <a href="#contacts" class="btn btn-primary">Заказать подбор</a>
       </article>
     </div>
+
+    <section class="catalog-priceboard" aria-label="Прайс по длине и типу волос">
+      <h3>Прайс по типам волос</h3>
+      <p class="priceboard-subtitle">Выберите тип и сравните стоимость по длине и тону</p>
+
+      <div class="hair-type-tabs" role="tablist" aria-label="Тип волос">
+        <button type="button" class="hair-type-tab is-active" role="tab" aria-selected="true" aria-controls="price-panel-slavic" id="price-tab-slavic" data-target="price-panel-slavic">Славянские «Премиум»</button>
+        <button type="button" class="hair-type-tab" role="tab" aria-selected="false" aria-controls="price-panel-euro" id="price-tab-euro" data-target="price-panel-euro">Европейские «Lux»</button>
+      </div>
+
+      <div class="price-panel" id="price-panel-slavic" role="tabpanel" aria-labelledby="price-tab-slavic">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Длина, см</th>
+                <th>Темные прямые 1-6 тон</th>
+                <th>Светлые прямые 7-12 тон</th>
+                <th>Темные волна 1-6 тон</th>
+                <th>Светлые волны 7-12 тон</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>40-49</td><td>12 000</td><td>12 500</td><td>11 500</td><td>12 000</td></tr>
+              <tr><td>50</td><td>17 000</td><td>18 500</td><td>16 000</td><td>17 000</td></tr>
+              <tr><td>55</td><td>18 000</td><td>20 500</td><td>17 000</td><td>19 000</td></tr>
+              <tr><td>60</td><td>20 000</td><td>22 500</td><td>19 000</td><td>21 000</td></tr>
+              <tr><td>65</td><td>22 500</td><td>25 000</td><td>21 000</td><td>23 000</td></tr>
+              <tr><td>70-79</td><td>25 000</td><td>27 000</td><td>24 000</td><td>26 000</td></tr>
+              <tr><td>80-89</td><td>27 000</td><td>30 000</td><td>26 000</td><td>28 000</td></tr>
+              <tr><td>90</td><td>30 000</td><td>33 000</td><td>27 000</td><td>30 000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="price-note">Цены указаны в рублях за 100 грамм. Точный расчёт после консультации и подбора.</p>
+      </div>
+
+      <div class="price-panel" id="price-panel-euro" role="tabpanel" aria-labelledby="price-tab-euro" hidden>
+        <p class="price-placeholder">Прайс для европейских волос «Lux» будет добавлен немного позже.</p>
+      </div>
+    </section>
   </section>
 
   <!-- ========== Block 5: Почему мы ========== -->
@@ -1055,9 +1302,14 @@
   </section>
 
   <!-- Модальное окно: просмотр изображения отзыва -->
-  <div id="review-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Просмотр отзыва">
-    <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
-    <img src="" alt="Отзыв в полном размере" id="review-modal-img">
+  <div id="review-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Просмотр отзыва" hidden>
+    <div class="modal-content">
+      <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
+      <button type="button" class="modal-nav modal-prev" aria-label="Предыдущий отзыв" disabled>&lsaquo;</button>
+      <button type="button" class="modal-nav modal-next" aria-label="Следующий отзыв" disabled>&rsaquo;</button>
+      <div class="modal-counter" aria-live="polite" aria-atomic="true"></div>
+      <img src="" alt="Отзыв в полном размере" id="review-modal-img" draggable="false">
+    </div>
   </div>
 
   <!-- ========== Block 7: Контакты (Footer) ========== -->
@@ -1089,7 +1341,7 @@
       </form>
       <div class="map-wrap">
         <iframe
-          src="https://yandex.ru/map-widget/v1/?ll=39.200296%2C51.660781&z=16&l=map"
+          src="https://yandex.com/map-widget/v1/?ll=39.202438%2C51.711599&mode=whatshere&whatshere%5Bpoint%5D=39.201814%2C51.711916&whatshere%5Bzoom%5D=17&z=17.4"
           title="Салон Appolonskaya_Hair на карте Воронежа"
           allowfullscreen
           loading="lazy"
@@ -1171,32 +1423,130 @@
       });
     })();
 
+    // Переключение табов прайса в блоке каталога
+    (function () {
+      var tabs = document.querySelectorAll('.hair-type-tab[data-target]');
+      var priceLinks = document.querySelectorAll('.js-price-link[data-price-tab]');
+      var priceBoard = document.querySelector('.catalog-priceboard');
+      var header = document.querySelector('.header');
+      if (!tabs.length) return;
+
+      function activateTab(tab) {
+        var targetId = tab.getAttribute('data-target');
+        if (!targetId) return;
+        tabs.forEach(function (btn) {
+          var isActive = btn === tab;
+          var panelId = btn.getAttribute('data-target');
+          var panel = panelId ? document.getElementById(panelId) : null;
+          btn.classList.toggle('is-active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          btn.setAttribute('tabindex', isActive ? '0' : '-1');
+          if (panel) {
+            if (isActive) panel.removeAttribute('hidden');
+            else panel.setAttribute('hidden', '');
+          }
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () { activateTab(tab); });
+        tab.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          var current = Array.prototype.indexOf.call(tabs, tab);
+          var next = e.key === 'ArrowRight' ? current + 1 : current - 1;
+          if (next < 0) next = tabs.length - 1;
+          if (next >= tabs.length) next = 0;
+          activateTab(tabs[next]);
+          tabs[next].focus();
+        });
+      });
+
+      priceLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var tabId = link.getAttribute('data-price-tab');
+          var targetTab = tabId ? document.getElementById(tabId) : null;
+          if (!targetTab) return;
+          activateTab(targetTab);
+          if (priceBoard) {
+            var headerOffset = header ? header.offsetHeight : 0;
+            var top = window.pageYOffset + priceBoard.getBoundingClientRect().top - headerOffset - 12;
+            window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+          }
+          targetTab.focus();
+        });
+      });
+    })();
+
     // Модальное окно отзывов: открытие по клику на изображение, закрытие по overlay/кнопке/Escape
     (function () {
       var modal = document.getElementById('review-modal');
       var modalImg = document.getElementById('review-modal-img');
       var closeBtn = modal && modal.querySelector('.modal-close');
       var wraps = document.querySelectorAll('.review-img-wrap[data-review-src]');
+      var prevBtn = modal && modal.querySelector('.modal-prev');
+      var nextBtn = modal && modal.querySelector('.modal-next');
+      var counterEl = modal && modal.querySelector('.modal-counter');
+      var sources = Array.prototype.slice.call(wraps)
+        .map(function (w) { return w.getAttribute('data-review-src'); })
+        .filter(Boolean);
+      var activeIndex = -1;
+      var lastActiveEl = null;
+      var touch = { startX: 0, startY: 0, moved: false };
 
-      function openModal(src) {
+      function clampIndex(i) {
+        if (!sources.length) return -1;
+        return Math.max(0, Math.min(sources.length - 1, i));
+      }
+      function updateNavUI() {
+        if (!modal || !modal.classList.contains('show')) return;
+        if (prevBtn) prevBtn.disabled = activeIndex <= 0;
+        if (nextBtn) nextBtn.disabled = activeIndex >= sources.length - 1;
+        if (counterEl) counterEl.textContent = sources.length ? (activeIndex + 1) + ' / ' + sources.length : '';
+      }
+
+      function openModal(src, opener) {
         if (!modal || !modalImg) return;
+        lastActiveEl = opener || document.activeElement;
         modalImg.src = src;
         modal.classList.add('show');
         modal.removeAttribute('hidden');
         document.body.style.overflow = 'hidden';
+        updateNavUI();
+        if (closeBtn) closeBtn.focus();
+      }
+      function openByIndex(nextIndex, opener) {
+        var i = clampIndex(nextIndex);
+        if (i < 0) return;
+        activeIndex = i;
+        openModal(sources[activeIndex], opener);
       }
       function closeModal() {
         if (!modal) return;
         modal.classList.remove('show');
         modal.setAttribute('hidden', '');
         document.body.style.overflow = '';
+        activeIndex = -1;
+        if (lastActiveEl && typeof lastActiveEl.focus === 'function') {
+          try { lastActiveEl.focus(); } catch (e) {}
+        }
+      }
+      function step(dir) {
+        if (!modal || !modal.classList.contains('show')) return;
+        if (!sources.length) return;
+        var next = clampIndex(activeIndex + dir);
+        if (next === activeIndex) return;
+        activeIndex = next;
+        modalImg.src = sources[activeIndex];
+        updateNavUI();
       }
 
       wraps.forEach(function (wrap) {
         wrap.addEventListener('click', function () {
-          var img = wrap.querySelector('img');
-          var src = wrap.getAttribute('data-review-src') || (img && img.src);
-          if (src) openModal(src);
+          var src = wrap.getAttribute('data-review-src');
+          var idx = sources.indexOf(src);
+          if (idx >= 0) return openByIndex(idx, wrap);
+          if (src) return openModal(src, wrap);
         });
         wrap.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -1206,6 +1556,8 @@
         });
       });
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
       if (modal) {
         modal.addEventListener('click', function (e) {
           if (e.target === modal) closeModal();
@@ -1213,7 +1565,36 @@
       }
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
+        if (!modal || !modal.classList.contains('show')) return;
+        if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
       });
+
+      if (modalImg) {
+        modalImg.addEventListener('touchstart', function (e) {
+          if (!modal || !modal.classList.contains('show')) return;
+          if (!e.touches || e.touches.length !== 1) return;
+          touch.startX = e.touches[0].clientX;
+          touch.startY = e.touches[0].clientY;
+          touch.moved = false;
+        }, { passive: true });
+        modalImg.addEventListener('touchmove', function (e) {
+          if (!e.touches || e.touches.length !== 1) return;
+          var dx = e.touches[0].clientX - touch.startX;
+          var dy = e.touches[0].clientY - touch.startY;
+          if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) touch.moved = true;
+        }, { passive: true });
+        modalImg.addEventListener('touchend', function (e) {
+          if (!modal || !modal.classList.contains('show')) return;
+          if (!touch.moved) return;
+          if (!e.changedTouches || !e.changedTouches.length) return;
+          var dx = e.changedTouches[0].clientX - touch.startX;
+          var dy = e.changedTouches[0].clientY - touch.startY;
+          if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+          if (dx < 0) step(1);
+          else step(-1);
+        }, { passive: true });
+      }
     })();
   </script>
 </body>
