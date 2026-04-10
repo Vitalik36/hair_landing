@@ -8,10 +8,8 @@
   <title>Апполонская_Хэир — Капсульное наращивание волос в Воронеже</title>
   <link rel="icon" href="icons/logo.png" type="image/png">
   <link rel="apple-touch-icon" href="icons/logo.png">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant:ital,wght@0,500;0,600;0,700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Шрифты: локальные файлы в /fonts (без запросов к Google) -->
+  <link rel="stylesheet" href="fonts/fonts.css">
   <style>
     /* ========== CSS Variables & Reset ========== */
     :root {
@@ -916,6 +914,7 @@
     }
     .footer-how p { margin: 0.5rem 0; }
     .map-wrap {
+      position: relative;
       border-radius: var(--radius);
       overflow: hidden;
       margin-bottom: 2rem;
@@ -924,12 +923,53 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 2rem;
+      background: var(--bg);
+      border: 1px solid var(--accent-mid);
     }
     .map-wrap iframe {
       width: 100%;
       height: 280px;
       border: 0;
       display: block;
+    }
+    .map-wrap.is-fallback iframe {
+      display: none;
+    }
+    .map-fallback[hidden] {
+      display: none !important;
+    }
+    .map-fallback {
+      display: block;
+    }
+    .map-fallback-figure {
+      margin: 0;
+    }
+    .map-fallback img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+      max-height: min(420px, 70vh);
+    }
+    .map-fallback-caption {
+      margin: 0;
+      padding: 0.9rem 1.1rem 1rem;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255, 240, 245, 0.65) 0%, var(--accent-light) 100%);
+      border-top: 1px solid rgba(255, 182, 193, 0.45);
+    }
+    .map-fallback-caption a {
+      color: var(--accent-strong);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .map-fallback-caption a:hover {
+      color: var(--text);
     }
     .footer-socials {
       display: flex;
@@ -1318,6 +1358,7 @@
   </section>
 
   <!-- ========== Block 6: Отзывы ========== -->
+  <!-- Тексты отзывов ниже задаются вручную; не редактировать без запроса владельца. -->
   <section class="section" id="reviews">
     <h2 class="section-title">Нам доверяют</h2>
     <p class="section-subtitle">Отзывы клиентов о наращивании и качестве волос</p>
@@ -1329,7 +1370,7 @@
             <div class="review-fallback">Скриншот отзыва (reviews/1.png)</div>
           </div>
           <blockquote class="review-cite">
-            Очень довольна результатом! Волосы выглядят как свои, никто не верит, что наращивание. Носить удобно, не путаются.
+            Волосы — восторг! Просто «лютый» <b>Люкс!</b>
             <span class="review-author">Анна</span>
           </blockquote>
         </figure>
@@ -1339,8 +1380,8 @@
             <div class="review-fallback">Скриншот отзыва (reviews/2.png)</div>
           </div>
           <blockquote class="review-cite">
-            Делала капсульное наращивание впервые. Консультация помогла определиться с цветом и длиной. Спасибо за терпение и профессионализм!
-            <span class="review-author">Марина</span>
+            Пришли волосы, очень мягкие. Приятно удивлена!
+            <span class="review-author">Анастасия</span>
           </blockquote>
         </figure>
         <figure class="review-figure" role="listitem">
@@ -1349,7 +1390,7 @@
             <div class="review-fallback">Скриншот отзыва (reviews/3.png)</div>
           </div>
           <blockquote class="review-cite">
-            Заказывала волосы под себя — привезли именно то, что нужно. Качество на высоте, буду обращаться ещё.
+            Получила волосы. Они супер! Подходят моим. Буду заказывать у вас.
             <span class="review-author">Елена</span>
           </blockquote>
         </figure>
@@ -1369,7 +1410,7 @@
             <div class="review-fallback">Скриншот отзыва (reviews/5.png)</div>
           </div>
           <blockquote class="review-cite">
-            Делала и наращивание, и покупала волосы отдельно. В обоих случаях осталась в восторге. Атмосфера в салоне очень приятная.
+            Заказывала подруге. Та очень довольна! Теперь хочу себе такие же волосы.
             <span class="review-author">Ирина</span>
           </blockquote>
         </figure>
@@ -1416,14 +1457,23 @@
         <p class="form-message" id="form-status" role="status" aria-live="polite"></p>
         <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку данных для связи.</p>
       </form>
-      <div class="map-wrap">
+      <div class="map-wrap" id="map-wrap">
+        <div class="map-fallback" id="map-fallback" hidden>
+          <figure class="map-fallback-figure">
+            <img src="img/address.png" alt="Схема прохода: Олимпийский бульвар, 12, Воронеж" width="600" height="400" loading="lazy" decoding="async">
+            <figcaption class="map-fallback-caption">
+              Интерактивная карта не загрузилась — показываем снимок схемы. Адрес: <strong>Олимпийский бульвар, 12</strong>.
+              <a id="map-fallback-link" href="#" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
+            </figcaption>
+          </figure>
+        </div>
         <iframe
-          src="https://yandex.com/map-widget/v1/?ll=39.202438%2C51.711599&mode=whatshere&whatshere%5Bpoint%5D=39.201814%2C51.711916&whatshere%5Bzoom%5D=17&z=17.4"
+          id="map-iframe"
+          data-map-src="https://yandex.com/map-widget/v1/?ll=39.202438%2C51.711599&mode=whatshere&whatshere%5Bpoint%5D=39.201814%2C51.711916&whatshere%5Bzoom%5D=17&z=17.4"
           title="Салон Appolonskaya_Hair на карте Воронежа"
           allowfullscreen
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div class="footer-socials">
         <a href="https://t.me/appolonskaya_hair" target="_blank" rel="noopener" aria-label="Telegram"><svg class="icon" aria-hidden="true"><use href="#icon-telegram"></use></svg></a>
@@ -1458,6 +1508,84 @@
             if (navMobile.classList.contains('is-open')) toggleMenu();
           });
         });
+      }
+    })();
+
+    // Карта: src у iframe не задаём в HTML — без сети не дергаем yandex.com; при сбое — img/address.png
+    (function () {
+      var wrap = document.getElementById('map-wrap');
+      var iframe = document.getElementById('map-iframe');
+      var fallback = document.getElementById('map-fallback');
+      var linkEl = document.getElementById('map-fallback-link');
+      if (!wrap || !iframe || !fallback) return;
+
+      var mapSrc = iframe.getAttribute('data-map-src');
+      if (linkEl && mapSrc) linkEl.setAttribute('href', mapSrc);
+
+      var fallbackShown = false;
+      var mapOk = false;
+      var timer;
+      var mapStarted = false;
+
+      function showFallback() {
+        if (fallbackShown || mapOk) return;
+        fallbackShown = true;
+        clearTimeout(timer);
+        mapStarted = false;
+        wrap.classList.add('is-fallback');
+        fallback.removeAttribute('hidden');
+        iframe.setAttribute('hidden', '');
+        iframe.setAttribute('aria-hidden', 'true');
+        iframe.removeAttribute('src');
+      }
+
+      function tryLoadMap() {
+        if (fallbackShown || mapOk || mapStarted) return;
+        if (!mapSrc) {
+          showFallback();
+          return;
+        }
+        if (typeof navigator.onLine === 'boolean' && !navigator.onLine) {
+          showFallback();
+          return;
+        }
+        mapStarted = true;
+        clearTimeout(timer);
+        timer = setTimeout(showFallback, 12000);
+        iframe.addEventListener('load', function onMapFrameLoad() {
+          iframe.removeEventListener('load', onMapFrameLoad);
+          clearTimeout(timer);
+          if (!fallbackShown) mapOk = true;
+        });
+        iframe.setAttribute('src', mapSrc);
+      }
+
+      var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (conn && conn.saveData) {
+        showFallback();
+        return;
+      }
+
+      if (typeof navigator.onLine === 'boolean' && !navigator.onLine) {
+        showFallback();
+        return;
+      }
+
+      window.addEventListener('offline', function () {
+        showFallback();
+      });
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            obs.disconnect();
+            tryLoadMap();
+          });
+        }, { rootMargin: '80px', threshold: 0.01 });
+        io.observe(wrap);
+      } else {
+        tryLoadMap();
       }
     })();
 
